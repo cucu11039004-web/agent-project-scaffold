@@ -6,17 +6,16 @@
 > ——以下为脚手架骨架，占位小节请按真实项目替换。——
 
 ## 文档索引（去哪找什么）
-- **上下文地图**：仓库根 `CONTEXT-MAP.md`（多上下文划分、共享内核、数据流主干）。
-- **术语表（glossary）**：仓库根 `CONTEXT.md`，全项目唯一一份（横切术语多，不按目录拆；
-  只放术语定义，不放实现/spec/进度）。grill-with-docs / domain-modeling 维护术语时写它。
+- **术语表（glossary）**：仓库根 `CONTEXT.md`，全项目唯一一份（只放术语定义，不放
+  实现/spec/进度）。grill-with-docs / domain-modeling 维护术语时写它。
 - **架构决策（ADR）**：系统级放 `docs/adr/NNNN-*.md`；某上下文专属的可就近放
   `<ctx>/docs/adr/`。只追加不回改，见 `docs/adr/README.md`。
 - **待办与进度**：仓库根 `TODO.md`（已完成 / 进行中 / 待办 / 以后，轻量清单）。稳定事实：本文件。
-- **规划→执行交接**：规划者（Claude Code `/plan` + grill-me / grill-with-docs）达成共识后，
-  **必须先把定稿的可执行计划写入仓库根 `PLAN.md` 再退出规划**——session 内的 plan 只是草稿，
-  不落盘等于没交接。执行者读 `PLAN.md` 执行，完成后回写 `TODO.md` 并把 `PLAN.md` 清空回模板；
-  **不做手工归档**，`git log -- PLAN.md` 即历史。跨会话上下文可用 handoff skill 生成背景文档
-  （落 OS 临时目录），以路径引用 `PLAN.md`，不复制其正文。
+- **规划→执行交接**：规划者（Claude Code `/plan` + grill-me / grill-with-docs）形成初稿就
+  落盘仓库根 `PLAN.md` 并标**状态**（草稿 / 评审中 / 定稿）；修改和给其他 agent 评审都直接
+  在 `PLAN.md` 上进行，git 历史自动留痕。执行者只执行状态为**定稿**的计划，完成后回写
+  `TODO.md` 并把 `PLAN.md` 清空回模板；**不做手工归档**，`git log -- PLAN.md` 即历史。
+  跨会话上下文可用 handoff skill 生成背景文档（落 OS 临时目录），以路径引用 `PLAN.md`。
 - **依赖的 skills**：见 `SKILLS.md`。
 
 ## 项目概览
