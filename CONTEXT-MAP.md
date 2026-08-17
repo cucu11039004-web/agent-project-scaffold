@@ -1,17 +1,20 @@
 # 上下文地图（CONTEXT-MAP） — 机器人模仿学习（Robot-IL）
 
-> 本文件是上下文划分的真相源。约定：术语表**就近放**各上下文 `CONTEXT.md`；架构决策放
+> 本文件是上下文划分的真相源：列出各限界上下文、共享内核与数据流主干。
+> 约定：术语表只有**一份**，放仓库根 `CONTEXT.md`（横切术语多，不按目录拆）；架构决策放
 > `docs/adr/`（系统级）或 `<ctx>/docs/adr/`（上下文级）；本文件固定在**仓库根**。
 > 术语懒创建。占位（<...>）按真实项目替换。
 
 ## 一、限界上下文
 
-| 上下文 | 职责 | 代码/目录 | 术语表 |
-|---|---|---|---|
-| 数据集 (dataset) | 采集 → 清洗/QC → 训练集转换；维度真相源 | `dataset/` | `dataset/CONTEXT.md` |
-| 训练 (training) | 策略网络结构、训练栈、checkpoint | `training/` | `training/CONTEXT.md` |
-| 推理 (inference) | 真机双进程推理：出动作、读传感/安全限速后下发 | `inference/` | `inference/CONTEXT.md` |
-| 运维 (ops) | 发布机制 + 现场运维：部署留痕、机器人主机、传感器服务 | `ops/`、横切 | `ops/CONTEXT.md` |
+| 上下文 | 职责 | 代码/目录 |
+|---|---|---|
+| 数据集 (dataset) | 采集 → 清洗/QC → 训练集转换；维度真相源 | `dataset/` |
+| 训练 (training) | 策略网络结构、训练栈、checkpoint | `training/` |
+| 推理 (inference) | 真机双进程推理：出动作、读传感/安全限速后下发 | `inference/` |
+| 运维 (ops) | 发布机制 + 现场运维：部署留痕、机器人主机、传感器服务 | `ops/`、横切 |
+
+各上下文的术语统一记到根 `CONTEXT.md`，不在各目录另建术语表。
 
 ## 二、共享内核（Shared Kernel）
 

@@ -8,7 +8,7 @@
 | skill | 用途 |
 |---|---|
 | `grill-me` | 关起门拷打一个方案/设计，逼清思路（不落盘） |
-| `grill-with-docs` | 拷打 + 顺手沉淀：术语进各上下文 `CONTEXT.md`、决策进 `docs/adr/` |
+| `grill-with-docs` | 拷打 + 顺手沉淀：术语进根 `CONTEXT.md`、决策进 `docs/adr/` |
 | `domain-modeling` | 维护领域术语表与 ADR（被 grill-with-docs 调用） |
 | `handoff` | 把当前会话压缩成交接文档，供另一个 agent 接手 |
 | `find-skills` | 到 skills 生态里发现/安装更多 skill |
