@@ -16,3 +16,10 @@ __pycache__/
 # datasets/
 
 # 注意：docs/ 是**跟踪**的（上下文地图、术语表、ADR、计划都在里面），不要忽略它。
+
+# 机器人/ML 项目常见大产物（按需打开）
+outputs/
+datasets/
+weights/
+*.mp4
+*.mkv

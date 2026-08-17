@@ -1,30 +1,39 @@
-# 上下文地图（CONTEXT-MAP）
+# 上下文地图（CONTEXT-MAP） — 机器人模仿学习（Robot-IL）
 
-> 本文件是上下文划分的真相源：列出各限界上下文（bounded context）、术语表位置、彼此之间的
-> 共享内核与依赖，以及贯穿全局的数据流主干。
->
-> 约定：术语表**就近放**在各上下文目录里的 `CONTEXT.md`；架构决策放 `docs/adr/`（系统级）
-> 或 `<ctx>/docs/adr/`（上下文级）；本地图文件固定在**仓库根**（domain-modeling skill 靠
-> "根目录有无 CONTEXT-MAP.md"判定多上下文）。术语表按**懒创建**填充——grill 过程中真敲定
-> 某个术语才写进去。单上下文的小项目可不建本文件，直接一份根 `CONTEXT.md` 即可。
+> 本文件是上下文划分的真相源。约定：术语表**就近放**各上下文 `CONTEXT.md`；架构决策放
+> `docs/adr/`（系统级）或 `<ctx>/docs/adr/`（上下文级）；本文件固定在**仓库根**。
+> 术语懒创建。占位（<...>）按真实项目替换。
 
 ## 一、限界上下文
 
 | 上下文 | 职责 | 代码/目录 | 术语表 |
 |---|---|---|---|
-| &lt;上下文A&gt; | &lt;职责&gt; | `&lt;dir&gt;/` | `&lt;dir&gt;/CONTEXT.md` |
-| &lt;上下文B&gt; | &lt;职责&gt; | `&lt;dir&gt;/` | `&lt;dir&gt;/CONTEXT.md` |
+| 数据集 (dataset) | 采集 → 清洗/QC → 训练集转换；维度真相源 | `dataset/` | `dataset/CONTEXT.md` |
+| 训练 (training) | 策略网络结构、训练栈、checkpoint | `training/` | `training/CONTEXT.md` |
+| 推理 (inference) | 真机双进程推理：出动作、读传感/安全限速后下发 | `inference/` | `inference/CONTEXT.md` |
+| 运维 (ops) | 发布机制 + 现场运维：部署留痕、机器人主机、传感器服务 | `ops/`、横切 | `ops/CONTEXT.md` |
 
 ## 二、共享内核（Shared Kernel）
 
 > 跨上下文共享、改动会同时波及多方的真相源，改前务必评估各侧影响。
 
-- **`&lt;shared_module&gt;`** —— &lt;它是什么的单一真相源，被哪些上下文共享&gt;。
+- **`<dims_spec>`** —— 观测/动作**维度定义**的单一真相源，被**数据集**与**推理**共同 import
+  （保证训练与推理严格一致）。
+- **`<ipc_common>`** —— 话题名/映射反映射/限速/**IPC 协议**的真相源，被推理侧两进程共享。
 
 ## 三、数据流主干
 
 ```
-&lt;上下文A&gt; ──&lt;动作&gt;──▶ &lt;产物&gt; ──▶ &lt;上下文B&gt; ──▶ ...
+数据集(dataset) ──采集/QC/转换──▶ 训练集
+     │  维度真相源(<dims_spec>)          │
+     │                                  ▼
+     │                          训练(training) ──▶ checkpoint
+     │                                              │
+     │                                  运维(ops) 单向部署 + 留痕
+     │                                              ▼
+     └──── 同一维度真相源 ────▶ 推理(inference)：推理进程 ⇄ IO 进程（<ipc_common>）
+                                     在运维环境（机器人主机/传感器服务）真机执行
 ```
 
-&lt;用一段话描述数据/控制如何在上下文之间流动。替换本段。&gt;
+数据从"数据集"流向"训练"产出 checkpoint，经"运维"单向部署上机，在"推理"里于"运维"环境下
+真机执行。维度真相源纵贯数据集与推理两端，保证训练与推理一致。
