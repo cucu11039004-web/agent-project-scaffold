@@ -12,6 +12,7 @@
 | `domain-modeling` | 维护领域术语表与 ADR（被 grill-with-docs 调用） |
 | `handoff` | 把当前会话压缩成交接文档，供另一个 agent 接手 |
 | `find-skills` | 到 skills 生态里发现/安装更多 skill |
+| `plan-flow` | 管理根目录 `PLAN.md` 的状态流转（草稿→评审→执行→归档），跨 agent 协作交接用 |
 
 ## 安装
 
